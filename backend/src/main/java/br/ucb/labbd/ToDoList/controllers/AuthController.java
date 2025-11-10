@@ -29,6 +29,12 @@ public class AuthController {
 
         return ResponseEntity.ok(Map.of("token", token));
     }
+    
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestHeader(name = "X-Auth-Token", required = false) String token) {
+    // Apenas retorna sucesso 204 para confirmar ao frontend
+    return ResponseEntity.noContent().build();
+}
 }
 
 class LoginRequest {
@@ -41,3 +47,4 @@ class LoginRequest {
     public String getSenha() { return senha; }
     public void setSenha(String senha) { this.senha = senha; }
 }
+
