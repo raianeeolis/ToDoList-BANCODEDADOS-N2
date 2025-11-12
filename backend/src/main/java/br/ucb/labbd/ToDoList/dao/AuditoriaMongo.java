@@ -1,8 +1,7 @@
 package br.ucb.labbd.ToDoList.dao;
 
-// O import de MongoClient mudou (a classe é com.mongodb.client.MongoClient)
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients; // NOVO: Classe para criar a conexão
+import com.mongodb.client.MongoClients; 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -28,9 +27,7 @@ public class AuditoriaMongo {
             collection.insertOne(log);
             System.out.println("Log inserido no MongoDB!");
         } catch (Exception e) {
-            // Em um ambiente de produção, é melhor usar um logger como SLF4J
             System.err.println("Erro ao conectar ou registrar no MongoDB: " + e.getMessage());
-            // e.printStackTrace(); // Remova esta linha em produção
         }
     }
 }
