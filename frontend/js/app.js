@@ -19,7 +19,6 @@ async function login() {
         return;
     }
 
-    // CORREÇÃO 1: Lê apenas o campo 'token' (já que o backend só retorna 'token')
     token = result.token; 
     console.log("TOKEN SALVO:", token);
     localStorage.setItem("token", token);
@@ -30,7 +29,6 @@ async function login() {
 }
 
 async function logout() {
-    // É altamente recomendado que você mapeie este endpoint no seu AuthController do Spring Boot
     await fetch(`${API}/auth/logout`, {
         method: "POST",
         headers: { "X-Auth-Token": token }
@@ -43,7 +41,6 @@ async function logout() {
 }
 
 async function loadTasks() {
-    // ... (restante da função loadTasks, que permanece o mesmo)
     try {
         console.log("TOKEN ENVIADO:", token);
 
@@ -89,7 +86,6 @@ async function loadTasks() {
 }
 
 async function createTask() {
-    // ... (função permanece a mesma)
     const titulo = document.getElementById("titulo").value;
     const descricao = document.getElementById("descricao").value;
     const prioridade = document.getElementById("prioridade").value;
@@ -108,7 +104,6 @@ async function createTask() {
     loadTasks();
 }
 
-// CORREÇÃO 2: A função editTask atualizada
 async function editTask(id) {
     const novoTitulo = prompt("Novo título:");
     if (novoTitulo === null) return; // Se cancelar no primeiro prompt, sai
@@ -122,10 +117,7 @@ async function editTask(id) {
     const novoStatus = prompt("Status (PENDENTE, EM_ANDAMENTO, CONCLUIDA):", "PENDENTE");
     if (novoStatus === null) return; // Se cancelar, sai
 
-    // O check de títulos e descrição vazios não é mais necessário, 
-    // pois o backend deve validar isso e retornar um 400.
 
-    // A requisição PUT agora é armazenada para verificação de erro
     const res = await fetch(`${API}/api/tarefas/${id}`, {
         method: "PUT",
         headers: {
@@ -141,7 +133,6 @@ async function editTask(id) {
         })
     });
 
-    // TRATAMENTO DE ERRO: Verifica se a resposta foi bem-sucedida (status 2xx)
     if (!res.ok) {
         const result = await res.json().catch(() => ({erro: "Erro desconhecido ao editar."}));
         console.error("ERRO AO EDITAR TAREFA:", result);
@@ -149,7 +140,6 @@ async function editTask(id) {
         return; // Sai da função após o erro
     }
 
-    // Apenas recarrega as tarefas se a atualização foi bem-sucedida
     loadTasks();
 }
 
