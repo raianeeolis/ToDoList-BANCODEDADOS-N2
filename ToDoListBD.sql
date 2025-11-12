@@ -212,7 +212,7 @@ VALUES(gerar_id_unico('GRP','grupos_usuarios'),'Administrador','Acesso total'),
 
 -- USUÁRIO DE TESTE 
 -- Email: teste.sucesso@ucb.br 
--- Senha: minhasenha
+-- Senha: 1234
 INSERT INTO usuarios (id_usuario, id_grupo, nome, email, senha_hash)
 VALUES(gerar_id_unico('USR','usuarios'), 'GRP-00002', 'Usuário de Teste', 'teste.sucesso@ucb.br', '$2a$10$ddnjrWaQHW1xB6sM2.NIM.ApoxwEnCpfRr/DPPTc3leXrD5PAnwlW');
 
